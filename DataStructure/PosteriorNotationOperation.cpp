@@ -2,9 +2,9 @@
 #include<stdlib.h>
 #include<string.h>
 
-// 스택을 이용한 괄호 검사 알고리즘
+// 스택을 이용한 후위 표기식 연산 알고리즘
 
-typedef char element;
+typedef int element;
 
 typedef struct stackNode
 {
@@ -82,46 +82,42 @@ void printStack()
 	printf("] ");
 }
 
-int testPair(const char* exp)
+element evalPostfix(const char* exp)	// 후위 표기식을 연산
 {
-	char symbol, open_pair;
-	int i, length = strlen(exp);
+	int opr1, opr2, value, i = 0;
+	int length = strlen(exp);
+	char symbol;
 	top = NULL;
-	for (i = 0; i < length; i++)
+	for (i = 0;i < length;i++)
 	{
 		symbol = exp[i];
-		switch (symbol)
+		if (symbol != '+' && symbol != '-' && symbol != '*' && symbol != '/')
 		{
-		case '(':
-		case '{':
-		case '[':
-			push(symbol);	break;
-		case ')':
-		case '}':
-		case ']':
-			if (top == NULL)	return 0;
-			else
+			value = symbol - '0';
+			push(value);
+		}
+		else
+		{
+			opr2 = pop();
+			opr1 = pop();
+			switch (symbol)
 			{
-				open_pair = pop();
-				if ((open_pair == '(' && symbol != ')') ||
-					(open_pair == '{' && symbol != '}') ||
-					(open_pair == '[' && symbol != ']'))
-					return 0;
-				else break;
+			case '+': push(opr1 + opr2); break;
+			case '-': push(opr1 - opr2); break;
+			case '*': push(opr1 * opr2); break;
+			case '/': push(opr1 / opr2); break;
 			}
 		}
 	}
-	if (top == NULL) return 1;
-	else return 0;
+	return pop();
 }
 
 void main()
 {
-	const char* express = "{(A + B) - 3}*5 + [{cos(x + y) + 7} - 1] * 4";
-	printf("%s", express);
-	if (testPair(express) == 1)
-		printf("\n\n 수식의 괄호가 맞게 사용되었습니다.");
-	else
-		printf("\n\n 수식의 괄호가 틀렸습니다.");
+	int result;
+	const char* express = "35*62/-";
+	printf("후위표기식 : %s", express);
+	result = evalPostfix(express);
+	printf("\n\n 연산결과 => %d", result);
 	return;
 }

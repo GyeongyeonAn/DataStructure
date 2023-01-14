@@ -1,5 +1,8 @@
 #include<stdio.h>
 
+// 선형 자료구조를 이용한 행렬 표현
+// 희소행렬을 효과적으로 표현하는 알고리즘
+
 typedef struct {
 	int row;
 	int col;
