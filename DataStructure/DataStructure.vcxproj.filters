@@ -24,7 +24,13 @@
     <ClCompile Include="MatrixPolynomial.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Stack.cpp">
+    <ClCompile Include="StackArray.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="StackLinkedList.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ParenthesesCheck.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

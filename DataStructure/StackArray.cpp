@@ -41,7 +41,7 @@ element peek()	// 원소 검색
 	if (top == -1)
 	{
 		printf("\n\n Stack is Empty \n");
-		exit(1);
+		return 0;
 	}
 	else return stack[top];
 }
@@ -57,7 +57,7 @@ void printStack()
 
 void main()
 {
-	int item;
+	element item;
 	printStack();
 	push(1);
 	printStack();
